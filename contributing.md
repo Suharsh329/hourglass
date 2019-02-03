@@ -19,4 +19,17 @@ To overcome this, modify the hl_example file and run the following commands to m
 
 tr -d '\15'  <hl_example> hl
 
-tr -d '\15'  <hl_example> hourglass
+tr -d '\15'  <hl_example> hourglass  
+```
+
+### Tests
+
+Tests for the commands are in the ```tests``` directory.  
+There are two ways to run the tests:
+```bash
+composer test-all  
+
+composer test -- --filter 'TestFileName'
+```
+The first command runs all the tests available in the ```tests``` directory  
+The second command allows you to run a specific test
