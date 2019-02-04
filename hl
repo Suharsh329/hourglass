@@ -3,14 +3,36 @@
 
 require_once __DIR__. '/vendor/autoload.php';
 
-use App\Commands\TaskCommand;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass;
 
-$application = new Application("Hourglass \xE2\x8C\x9B ", '0.1');
+$container = new ContainerBuilder();
 
-$command = new TaskCommand();
+$loader = new YamlFileLoader($container, new FileLocator(__DIR__));
 
-$application->add($command);
+try {
+    $loader->load('config/services.yml');
+} catch(Exception $e) {
+    echo $e;
+}
+
+$container->addCompilerPass(new AddConsoleCommandPass);
+$container->compile();
+try {
+    $commandLoader = $container->get('console.command_loader');
+} catch(Exception $e) {
+    echo $e;
+}
+
+$application = new Application("Hourglass \xE2\x8C\x9B ", ' 0.1');
+
+foreach ($container->getParameter('console.command.ids') as $id) {
+    $application->add($container->get($id));
+}
+$application->setCommandLoader($commandLoader);
 
 try {
     $application->run();
