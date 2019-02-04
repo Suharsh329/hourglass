@@ -1,0 +1,17 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  App\Commands\:
+    resource: '../src/Commands'
+    tags: ['console.command']
+
+  App\Helpers\:
+    resource: '../src/Helpers'
+
+  console.command.task:
+    class: App\Commands\TaskCommand
+    tags:
+      - { name: console.command, command: task }
