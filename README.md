@@ -35,6 +35,8 @@ git clone git@github.com:Suharsh329/hourglass.git
 cd hourglass
 
 composer install
+
+cat hourglass.sql | sqlite3 hourglass.db
 ```
 
 Allow hl and hourglass files to be executable  

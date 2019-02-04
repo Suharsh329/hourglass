@@ -9,7 +9,7 @@ If you make changes to the hl and hourglass files present in the root directory,
 
 ```bash
 
-/usr/bin/env: ‘php\r’: No such file or directory
+/usr/bin/env: 'php\r': No such file or directory
 
 ```
 
@@ -27,9 +27,11 @@ tr -d '\15'  <hl_example> hourglass
 Tests for the commands are in the ```tests``` directory.  
 There are two ways to run the tests:
 ```bash
-composer test-all  
+composer* test-all*  
 
-composer test -- --filter 'TestFileName'
+composer test -- --filter 'TestFileName'*
 ```
 The first command runs all the tests available in the ```tests``` directory  
-The second command allows you to run a specific test
+The second command allows you to run a specific test  
+
+*Note that the test script in ```composer.json``` uses phpunit since I have it globally installed. If it is not globally installed on your machine, either install it or change the script to ```./vendor/bin/phpunit```.
