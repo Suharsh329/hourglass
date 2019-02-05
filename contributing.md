@@ -27,7 +27,7 @@ tr -d '\15'  <hl_example> hourglass
 Tests for the commands are in the ```tests``` directory.  
 There are two ways to run the tests:
 ```bash
-composer* test-all*  
+composer test-all*  
 
 composer test -- --filter 'TestFileName'*
 ```

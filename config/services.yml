@@ -10,8 +10,3 @@ services:
 
   App\Helpers\:
     resource: '../src/Helpers'
-
-  console.command.task:
-    class: App\Commands\TaskCommand
-    tags:
-      - { name: console.command, command: task }
