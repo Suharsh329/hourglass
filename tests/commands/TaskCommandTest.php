@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUndefinedMethodInspection */
 
 use App\Commands\TaskCommand;
 use Symfony\Component\Console\Application;
@@ -12,7 +12,7 @@ class TaskCommandTest extends TestCase
     protected function setUp(): void
     {
         $application = new Application();
-        $application->add(new TaskCommand());
+        $application->add(new TaskCommand(new \App\Helpers\TaskNote(new \App\Helpers\Database())));
         $command = $application->find('task');
         $this->commandTester = new CommandTester($command);
     }
@@ -38,7 +38,7 @@ class TaskCommandTest extends TestCase
         $this->commandTester->execute([
             'command' => 'task',
             'task_description' => ["A", "new", "task"],
-            '--board' => ["k", "f+"],
+            '--board' => ["k", "f+"], // ["_", "-"]
         ]);
 
         $this->assertStringContainsString('Please enter a valid board name', $this->commandTester->getDisplay());
@@ -54,4 +54,16 @@ class TaskCommandTest extends TestCase
 
         $this->assertStringContainsString("Main k", $this->commandTester->getDisplay());
     }*/
+
+
+    public function testCanBeATask(): void
+    {
+        $this->commandTester->execute([
+            'command' => 'task',
+            'task_description' => ["A", "new", "task"],
+            '--board' => ["_example-"],
+        ]);
+
+        $this->assertStringContainsString('Task created', $this->commandTester->getDisplay());
+    }
 }
