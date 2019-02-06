@@ -44,17 +44,6 @@ class TaskCommandTest extends TestCase
         $this->assertStringContainsString('Please enter a valid board name', $this->commandTester->getDisplay());
     }
 
-    /*public function testBoardNames(): void
-    {
-        $this->commandTester->execute([
-            'command' => 'task',
-            'task_description' => ["A", "new", "task"],
-            '--board' => ["Main", "main", "MaIn", "K"],
-        ]);
-
-        $this->assertStringContainsString("Main k", $this->commandTester->getDisplay());
-    }*/
-
 
     public function testCanBeATask(): void
     {
