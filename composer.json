@@ -9,7 +9,12 @@
     }],
     "scripts": {
         "test-all": "phpunit --bootstrap vendor/autoload.php tests",
-        "test": "phpunit --bootstrap vendor/autoload.php tests/"
+
+        "test-all-commands": "phpunit --bootstrap vendor/autoload.php tests/commands",
+        "test-all-helpers": "phpunit --bootstrap vendor/autoload.php tests/helpers",
+
+        "test-command": "phpunit --bootstrap vendor/autoload.php tests/commands/",
+        "test-helper": "phpunit --bootstrap vendor/autoload.php tests/helpers/"
     },
     "autoload": {
         "psr-4": {
@@ -18,7 +23,11 @@
     },
     "require": {
         "symfony/console": "^4.2",
-        "ext-ctype": "*"
+        "ext-ctype": "*",
+        "symfony/config": "^4.2",
+        "symfony/yaml": "^4.1",
+        "symfony/dependency-injection": "^4.2",
+      "ext-pdo": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0"
