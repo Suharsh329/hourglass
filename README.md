@@ -3,7 +3,8 @@
 ## Description
 
 A command line application written in PHP? WHY?!  
-The release of PHP 7 has truly changed the way we write code in the language and on top of that [Symfony](https://symfony.com/) provides a phenomenal interface for designing cli apps. 
+The release of PHP 7 has truly changed the way we write code in the language and on top of that [Symfony](https://symfony.com/) provides a phenomenal interface for designing cli apps.  
+Hourglass is a simple application that allows users to manage tasks and notes from the command line. 
 
 ## Table of Contents
 
@@ -61,9 +62,11 @@ If hl command does not work, use ./hl (Same with hourglass)
 ### Examples
 
 ```bash
-hl //Displays all tasks and notes
+hl [Lists all avaialble commands and options]  
 
-hl t This is a task -b Coding //Adds a task to the coding board
+hl p [Displays all tasks and notes]  
+
+hl t This is a task -b Coding [Adds a task to the coding board]
 ```
 
 ### List of Commands
