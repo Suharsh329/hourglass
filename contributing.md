@@ -29,9 +29,18 @@ There are two ways to run the tests:
 ```bash
 composer test-all*  
 
-composer test -- --filter 'TestFileName'*
+composer test-all-commands*
+
+composer test-all-helpers*
+
+composer test-command -- --filter 'CommandTestFileName'*  
+
+composer test-helper -- --filter 'HelperTestFileName'*
 ```
 The first command runs all the tests available in the ```tests``` directory  
-The second command allows you to run a specific test  
+The second command runs all the tests available in the ```commands``` directory    
+The third command runs all the tests available in the ```helpers``` directory  
+The fourth command allows you to run a specific test in the ```commands``` directory  
+The last command allows you to run a specific test in the ```helpers``` directory  
 
 *Note that the test script in ```composer.json``` uses phpunit since I have it globally installed. If it is not globally installed on your machine, either install it or change the script to ```./vendor/bin/phpunit```.
