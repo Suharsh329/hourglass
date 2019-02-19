@@ -24,18 +24,27 @@ tr -d '\15'  <hl_example> hourglass
 
 ### Tests
 
-Tests for the commands are in the ```tests``` directory.  
-There are two ways to run the tests:
+#### Test Database
+The hourglass.db file is primarily used for storing and displaying tasks and notes. This data can be tested for different output styles.  
+Using this file for testing the commands will add unnecessary data to the file and make it tedious to keep deleting test data.    
+Instead, I have pointed the test files to run on the test.db file using the MockDatabase class.  
+Run the following command to initialize the test database with tables:  
 ```bash
-composer test-all*  
+cat hourglass.sql | sqlite3 test.db
+```
 
-composer test-all-commands*
+Tests for the commands are in the ```tests``` directory.  
+There are multiple ways to run the tests:
+```bash
+composer test-all  
 
-composer test-all-helpers*
+composer test-all-commands
 
-composer test-command -- --filter 'CommandTestFileName'*  
+composer test-all-helpers
 
-composer test-helper -- --filter 'HelperTestFileName'*
+composer test-command -- --filter 'CommandTestFileName'  
+
+composer test-helper -- --filter 'HelperTestFileName'
 ```
 The first command runs all the tests available in the ```tests``` directory  
 The second command runs all the tests available in the ```commands``` directory    
@@ -43,4 +52,3 @@ The third command runs all the tests available in the ```helpers``` directory
 The fourth command allows you to run a specific test in the ```commands``` directory  
 The last command allows you to run a specific test in the ```helpers``` directory  
 
-*Note that the test script in ```composer.json``` uses phpunit since I have it globally installed. If it is not globally installed on your machine, either install it or change the script to ```./vendor/bin/phpunit```.
