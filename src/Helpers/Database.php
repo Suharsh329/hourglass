@@ -5,12 +5,11 @@ namespace App\Helpers;
 
 class Database extends \PDO
 {
-    private $dsn = 'sqlite:' . __DIR__ . '/../../hourglass.db';
-
     /**
      * Initializes the PDO object
+     * @param string $dsn
      */
-    public function __construct()
+    public function __construct($dsn="sqlite:". __DIR__ . "/../../hourglass.db")
     {
         $options = [
             \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
@@ -18,6 +17,6 @@ class Database extends \PDO
             \PDO::ATTR_EMULATE_PREPARES   => false,
         ];
 
-        parent::__construct($this->dsn, '', '', $options);
+        parent::__construct($dsn, '', '', $options);
     }
 }
