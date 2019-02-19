@@ -1,5 +1,7 @@
 <?php /** @noinspection PhpUndefinedMethodInspection */
 
+namespace Test\Commands;
+
 use App\Commands\TaskCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -12,7 +14,7 @@ class TaskCommandTest extends TestCase
     protected function setUp(): void
     {
         $application = new Application();
-        $application->add(new TaskCommand(new \App\Helpers\TaskNote(new \App\Helpers\Database())));
+        $application->add(new TaskCommand(new \App\Helpers\TaskNote(new \Test\MockDatabase())));
         $command = $application->find('task');
         $this->commandTester = new CommandTester($command);
     }

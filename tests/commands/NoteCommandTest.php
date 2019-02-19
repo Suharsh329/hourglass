@@ -1,5 +1,7 @@
 <?php /** @noinspection PhpUndefinedMethodInspection */
 
+namespace Test\Commands;
+
 use App\Commands\NoteCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -14,7 +16,7 @@ class NoteCommandTest extends TestCase
     protected function setUp(): void
     {
         $application = new Application();
-        $application->add(new NoteCommand(new \App\Helpers\TaskNote(new \App\Helpers\Database())));
+        $application->add(new NoteCommand(new \App\Helpers\TaskNote(new \Test\MockDatabase())));
         $this->command = $application->find('note');
         $this->commandTester = new CommandTester($this->command);
     }
