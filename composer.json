@@ -8,17 +8,22 @@
         "email": "suharsh329@gmail.com"
     }],
     "scripts": {
-        "test-all": "phpunit --bootstrap vendor/autoload.php tests",
+        "test-all": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests",
 
-        "test-all-commands": "phpunit --bootstrap vendor/autoload.php tests/commands",
-        "test-all-helpers": "phpunit --bootstrap vendor/autoload.php tests/helpers",
+        "test-all-commands": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/commands",
+        "test-all-helpers": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/helpers",
 
-        "test-command": "phpunit --bootstrap vendor/autoload.php tests/commands/",
-        "test-helper": "phpunit --bootstrap vendor/autoload.php tests/helpers/"
+        "test-command": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/commands/",
+        "test-helper": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/helpers/"
     },
     "autoload": {
         "psr-4": {
             "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/"
         }
     },
     "require": {
