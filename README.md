@@ -17,6 +17,8 @@ Hourglass is a simple application that allows users to manage tasks and notes fr
       * [Examples](#examples)
       * [List of Commands](#list-of-commands)
         * [Task Command](#task-command)
+        * [Note Command](#note-command)
+        * [Print Command](#print-command)
    * [Development](#development)
    * [License](#license)
 <!--te-->
@@ -90,10 +92,29 @@ hl t My first task -d 5
 ```
 The task is due in 5 days.
 
+#### Note Command  
+##### Shortcut: hl n Expanded command: hourglass note  
+Without a board specified, the note belongs to the main board.
+```bash
+hl n My first note
+```
+
+With a board specified; a new board will be created if it does not exist.
+```bash
+hl n My first note -b Board1,Board2
+```
+Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)  
+
+#### Print Command  
+##### Shortcut: hl p Expanded command: hourglass print  
+Prints out board-wise tasks and notes.
+```bash
+hl p
+```
+
 ## Development
 
 If you would like to contribute to this project, please have a look at the [contributing guideline](https://github.com/Suharsh329/hourglass/blob/master/contributing.md).
-
 
 ## Related 
 
