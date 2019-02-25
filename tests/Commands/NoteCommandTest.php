@@ -23,14 +23,15 @@ class NoteCommandTest extends TestCase
 
     protected function tearDown():void
     {
+        $this->command = null;
         $this->commandTester = null;
     }
 
-    public function testCannotBeABoardName(): void
+    public function testCannotBeANote(): void
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
-            'note_description' => ["A", "new", "task"],
+            'note_description' => ["A", "new", "note"],
             '--board' => ["k", "f+"], // ["_", "-"]
         ]);
 
@@ -42,7 +43,7 @@ class NoteCommandTest extends TestCase
     {
         $this->commandTester->execute([
             'command' => $this->command->getName(),
-            'note_description' => ["A", "new", "task"],
+            'note_description' => ["A", "new", "note"],
             '--board' => ["_example-"],
         ]);
 

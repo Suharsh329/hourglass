@@ -11,23 +11,26 @@ class TaskCommandTest extends TestCase
 {
     private $commandTester;
 
+    private $command;
+
     protected function setUp(): void
     {
         $application = new Application();
         $application->add(new TaskCommand(new \App\Helpers\TaskNote(new \Test\MockDatabase())));
-        $command = $application->find('task');
-        $this->commandTester = new CommandTester($command);
+        $this->command = $application->find('task');
+        $this->commandTester = new CommandTester($this->command);
     }
 
     protected function tearDown():void
     {
+        $this->command = null;
         $this->commandTester = null;
     }
 
-    public function testCannotBeAValidDueDate(): void
+    public function testCannotBeATask1(): void
     {
        $this->commandTester->execute([
-           'command' => 'task',
+           'command' => $this->command->getName(),
            'task_description' => ["A", "new", "task"],
            '--due' => 's',
         ]);
@@ -35,10 +38,10 @@ class TaskCommandTest extends TestCase
         $this->assertStringContainsString('Please enter a valid number', $this->commandTester->getDisplay());
     }
 
-    public function testCannotBeABoardName(): void
+    public function testCannotBeATask2(): void
     {
         $this->commandTester->execute([
-            'command' => 'task',
+            'command' => $this->command->getName(),
             'task_description' => ["A", "new", "task"],
             '--board' => ["k", "f+"], // ["_", "-"]
         ]);
@@ -50,7 +53,7 @@ class TaskCommandTest extends TestCase
     public function testCanBeATask(): void
     {
         $this->commandTester->execute([
-            'command' => 'task',
+            'command' => $this->command->getName(),
             'task_description' => ["A", "new", "task"],
             '--board' => ["_example-"],
         ]);
