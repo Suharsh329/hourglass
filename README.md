@@ -19,6 +19,7 @@ Hourglass is a simple application that allows users to manage tasks and notes fr
         * [Task Command](#task-command)
         * [Note Command](#note-command)
         * [Print Command](#print-command)
+        * [Check Command](#check-command)
    * [Development](#development)
    * [License](#license)
 <!--te-->
@@ -32,7 +33,6 @@ Hourglass is a simple application that allows users to manage tasks and notes fr
 Install with [composer](https://getcomposer.org/)  
 
 ```bash
-
 git clone git@github.com:Suharsh329/hourglass.git
 
 cd hourglass
@@ -75,14 +75,14 @@ hl t This is a task -b Coding [Adds a task to the coding board]
 
 #### Task Command  
 ##### Shortcut: hl t Expanded command: hourglass task  
-Without a board specified, the task belongs to the main board.
+Without a board specified, the task belongs to the Main board.
 ```bash
 hl t My first task
 ```
 
 With a board specified; a new board will be created if it does not exist.
 ```bash
-hl t My first task -b Board1,Board2
+hl t My first task -b board1,board2
 ```
 Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)  
 
@@ -94,7 +94,7 @@ The task is due in 5 days.
 
 #### Note Command  
 ##### Shortcut: hl n Expanded command: hourglass note  
-Without a board specified, the note belongs to the main board.
+Without a board specified, the note belongs to the Main board.
 ```bash
 hl n My first note
 ```
@@ -110,6 +110,13 @@ Each board name is separated by a comma with no spaces (hyphens and underscores 
 Prints out board-wise tasks and notes.
 ```bash
 hl p
+```
+
+#### Check Command
+##### Shortcut: hl c Expanded command: hourglass ch
+Command checks or un-checks tasks for the specified boards (Default Main)
+```bash
+hl c 1,2 -b coding
 ```
 
 ## Development
