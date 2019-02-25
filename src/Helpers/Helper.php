@@ -17,9 +17,9 @@ class Helper
      * @param string $board
      * @return int
      */
-    protected function generateId(string $board): int
+    public function generateId(string $board): int
     {
-        $sql = "SELECT MAX(id) FROM tasks_notes WHERE board = :board";
+        $sql = "SELECT MAX(id) FROM tasks_notes WHERE board = :board;";
 
         $stmt = $this->db->prepare($sql);
 
@@ -40,9 +40,9 @@ class Helper
      * @param string $board
      * @return bool
      */
-    protected function boardExists(string $board): bool
+    public function boardExists(string $board): bool
     {
-        $sql = "SELECT name FROM boards WHERE name = :board";
+        $sql = "SELECT name FROM boards WHERE name = :board;";
 
         $stmt = $this->db->prepare($sql);
 
@@ -58,7 +58,7 @@ class Helper
      * @param string $board
      * @return void
      */
-    protected function createBoard(string $board): void
+    public function createBoard(string $board): void
     {
         $sql = "INSERT INTO boards(name) VALUES(:board);";
 
@@ -80,23 +80,26 @@ class Helper
         return date('jS F Y', strtotime($date . " + $due days"));
     }
 
-        /**
-     * Checks if due date is a valid number and if board name is alphanumeric
+    /**
+     * Checks if the due date parameter is a number
      * @param string $value
-     * @param string $type
      * @return bool
      */
-    public function isValidInput(string $value, string $type): bool
+    public function isValidNumber(string $value): bool
     {
-        // Check if board name is valid
-        // Alphanumeric names with hyphens and underscores are allowed
-        if ($type === 'board') {
-            $aValid = ['-', '_'];
-            return ctype_alnum(str_replace($aValid, '', $value));
-        }
-
-        // Check if due date is a number
         return ctype_digit($value);
+    }
+
+    /**
+     * Checks if the specified board name is valid or not
+     * @param string $board
+     * @return bool
+     */
+    public function isValidBoardName(string $board): bool
+    {
+        // Alphanumeric names with hyphens and underscores are allowed
+        $aValid = ['-', '_'];
+        return ctype_alnum(str_replace($aValid, '', $board));
     }
 
     /**
@@ -110,7 +113,7 @@ class Helper
 
         foreach ($boards as $board) {
             $val = strtolower($board);
-            if($val == "main") {
+            if(strpos($val, "main") !== false) {
                 $val = "Main";
             }
             array_push($temp, $val);
@@ -129,7 +132,7 @@ class Helper
         $_boards = explode(',', implode(",", $boards));
 
         foreach ($_boards as $board) {
-            if (!$this->isValidInput($board, 'board')) {
+            if (!$this->isValidBoardName($board)) {
                 return [];
             }
         }

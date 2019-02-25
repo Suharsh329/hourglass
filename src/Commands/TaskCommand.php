@@ -11,8 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TaskCommand extends Command
 {
-    protected  static $defaultName = 'task';
-    protected $task;
+    protected static $defaultName = 'task';
+    private $task;
 
     public function __construct(TaskNote $note)
     {
@@ -23,7 +23,7 @@ class TaskCommand extends Command
 
     protected function configure()
     {
-        $this->setDescription('Create a new task')
+        $this->setDescription('Creates a new task')
             ->addArgument('task_description', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Task description')
             ->addOption(
                 'board',
@@ -46,6 +46,7 @@ class TaskCommand extends Command
         // Default board is Main
         $boards = ['Main'];
 
+        // If user enters board names with the board flag
         if ($input->getOption('board')) {
             $boards = $this->task->getValidatedBoards($input->getOption('board'));
             if(empty($boards)) {
@@ -59,11 +60,11 @@ class TaskCommand extends Command
 
         // If user enters a number with the due date flag
         if ($input->getOption('due')) {
-            if (!$this->task->isValidInput($input->getOption('due'), 'due')) {
+            if (!$this->task->isValidNumber($input->getOption('due'))) {
                 $output->writeln("<comment>Please enter a valid number</comment>");
                 return;
             }
-            // Convert the due date from input number to actual date
+            // Convert the input number to actual date
             $due = $this->task->getDueDate(date('jS F Y'), $input->getOption('due'));
         }
 
