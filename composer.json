@@ -10,11 +10,11 @@
     "scripts": {
         "test-all": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests",
 
-        "test-all-commands": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/commands",
-        "test-all-helpers": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/helpers",
+        "test-all-commands": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/Commands",
+        "test-all-helpers": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/Helpers",
 
-        "test-command": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/commands/",
-        "test-helper": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/helpers/"
+        "test-command": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/Commands/",
+        "test-helper": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/Helpers/"
     },
     "autoload": {
         "psr-4": {

@@ -47,8 +47,9 @@ composer test-command -- --filter 'CommandTestFileName'
 composer test-helper -- --filter 'HelperTestFileName'
 ```
 The first command runs all the tests available in the ```tests``` directory  
-The second command runs all the tests available in the ```commands``` directory    
-The third command runs all the tests available in the ```helpers``` directory  
-The fourth command allows you to run a specific test in the ```commands``` directory  
-The last command allows you to run a specific test in the ```helpers``` directory  
+The second command runs all the tests available in the ```Commands``` directory    
+The third command runs all the tests available in the ```Helpers``` directory  
+The fourth command allows you to run a specific test in the ```Commands``` directory  
+The last command allows you to run a specific test in the ```Helpers``` directory  
+All the mock classes can be found in the ```Mocks``` directory  
 
