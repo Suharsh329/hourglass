@@ -16,7 +16,7 @@ class TaskCommandTest extends TestCase
     protected function setUp(): void
     {
         $application = new Application();
-        $application->add(new TaskCommand(new \App\Helpers\TaskNote(new \Test\MockDatabase())));
+        $application->add(new TaskCommand(new \App\Helpers\TaskNote(new \Test\Mocks\MockDatabase())));
         $this->command = $application->find('task');
         $this->commandTester = new CommandTester($this->command);
     }

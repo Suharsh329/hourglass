@@ -16,7 +16,7 @@ class NoteCommandTest extends TestCase
     protected function setUp(): void
     {
         $application = new Application();
-        $application->add(new NoteCommand(new \App\Helpers\TaskNote(new \Test\MockDatabase())));
+        $application->add(new NoteCommand(new \App\Helpers\TaskNote(new \Test\Mocks\MockDatabase())));
         $this->command = $application->find('note');
         $this->commandTester = new CommandTester($this->command);
     }
