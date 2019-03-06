@@ -27,7 +27,7 @@ class CheckCommand extends Command
         $this->setDescription('Checks or un-checks a task from specified board.')
             ->addArgument('task', InputArgument::REQUIRED | InputArgument::IS_ARRAY, 'Tasks to check or un-check.')
             ->addOption(
-                'boards',
+                'board',
                 'b',
                 InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
                 'Specify which board the task belongs to.'
@@ -42,12 +42,15 @@ class CheckCommand extends Command
         // Default board is Main
         $boards = ['Main'];
 
-        // If user enters board names with the board flag
-        if ($input->getOption('boards')) {
-            $boards = explode(',', implode(',', $input->getOption('boards')));
+        if ($input->getOption('board')) {
+            $boards = $this->check->getValidatedBoards($input->getOption('board'));
+            if(empty($boards)) {
+                $output->writeln("<comment>Please enter a valid board name</comment>");
+                return;
+            }
         }
 
-       $result = $this->check->task($values, $boards);
+        $result = $this->check->task($values, $boards);
 
         if ($result) {
             $output->writeln("<info>Updated task(s)</info>");
