@@ -36,7 +36,7 @@ class MockHelper extends Helper
      */
     public function deleteAll(): void
     {
-        $sql = "DELETE FROM task_notes;";
+        $sql = "DELETE FROM tasks_notes;";
 
         $stmt = $this->db->prepare($sql);
 

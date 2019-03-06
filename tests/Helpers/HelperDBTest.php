@@ -35,6 +35,8 @@ class HelperDBTest extends TestCase
 
         $this->helper->addBoard($board);
 
+        $this->helper->deleteAll();
+
         $this->assertEquals(1, $this->helper->generateId($board));
     }
 
