@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS tasks_notes(
     due_date TEXT DEFAULT "Indefinite",
     completed INTEGER DEFAULT 0,
     type TEXT NOT NULL,
-    board TEXT REFERENCES boards(name)
+    board TEXT,
+    FOREIGN KEY(board) REFERENCES boards(name)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
