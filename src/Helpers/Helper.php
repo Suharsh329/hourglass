@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 
+
 class Helper
 {
     protected $db;
@@ -10,6 +11,46 @@ class Helper
     public function __construct(Database $db)
     {
         $this->db = $db;
+    }
+
+    /**
+     * Updates id of task or note after deleting or updating an entry
+     * @return void
+     */
+    public function updateId(): void
+    {
+        $sql = "SELECT name FROM boards;";
+
+        $row = $this->db->query($sql);
+
+        foreach($row as $board)
+        {
+            $sql = "SELECT id FROM tasks_notes WHERE board = :board;";
+
+            $stmt = $this->db->prepare($sql);
+
+            $stmt->bindParam(':board', $board['name']);
+
+            $stmt->execute();
+
+            $i = 1;
+
+            $row = $stmt->fetchAll();
+
+            foreach ($row as $id) {
+                $sql = "UPDATE tasks_notes SET id = :id WHERE id = :val;";
+
+                $stmt = $this->db->prepare($sql);
+
+                $stmt->bindParam(':id', $i);
+
+                $stmt->bindParam(':val', $id['id']);
+
+                $stmt->execute();
+
+                $i++;
+            }
+        }
     }
 
     /**
@@ -129,7 +170,7 @@ class Helper
      */
     public function getValidatedBoards(array $boards): array
     {
-        $_boards = explode(',', implode(",", $boards));
+        $_boards = explode(',', implode(',', $boards));
 
         foreach ($_boards as $board) {
             if (!$this->isValidBoardName($board)) {
@@ -137,6 +178,6 @@ class Helper
             }
         }
 
-        return $this->sanitizeBoards($boards);
+        return $this->sanitizeBoards($_boards);
     }
 }
