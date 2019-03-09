@@ -64,7 +64,7 @@ class PrintCommand extends Command
 
             if ($entry['type'] == 'task') {
                 if ($entry['completed']) {
-                    $output->writeln("<info>$this->checked</info>" . "<text>" . $entry['description'] . "</text>");
+                    $output->writeln("<info>$this->checked</info>" . "<text>\e[9m" . $entry['description'] . "\e[29m</text>");
                 } else {
                     if ($entry['due'] !== 'Indefinite') {
                         if ($entry['due'] < 0) {
