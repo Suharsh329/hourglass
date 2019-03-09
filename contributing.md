@@ -53,3 +53,5 @@ The fourth command allows you to run a specific test in the ```Commands``` direc
 The last command allows you to run a specific test in the ```Helpers``` directory  
 All the mock classes can be found in the ```Mocks``` directory  
 
+The tests in the ```Commands``` directory are integration tests. These commands store the output in the database.  
+The tests in the ```Helpers``` directory are of both types (integration and unit).
