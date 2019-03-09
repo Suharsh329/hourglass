@@ -2,9 +2,10 @@
 
 ## Description
 
+Hourglass is a simple application that allows users to manage tasks and notes from the command line. And the best part, it's written in PHP!  
 A command line application written in PHP? WHY?!  
-The release of PHP 7 has truly changed the way we write code in the language and on top of that [Symfony](https://symfony.com/) provides a phenomenal interface for designing cli apps.  
-Hourglass is a simple application that allows users to manage tasks and notes from the command line. 
+The release of PHP 7 has truly changed the way we write code in the language and on top of that [Symfony](https://symfony.com/) provides a phenomenal interface for designing cli apps. PHP also has built-in support for SQLite; a self-contained, embedded database engine. PHP 7 + Relational Database seems like a good combo to me.   
+Moving on from the technical shenanigans, we know that developers spend a lot of time in the terminal. It's a convenient place to store and access data. A more streamlined workflow ensues when the developer uses the command line to keep track of their tasks and notes. Plus, having a to-do list in the terminal means there is more room for StackOverflow tabs in the browser.  
 
 ## Table of Contents
 
@@ -20,6 +21,7 @@ Hourglass is a simple application that allows users to manage tasks and notes fr
         * [Note Command](#note-command)
         * [Print Command](#print-command)
         * [Check Command](#check-command)
+        * [Delete Command](#delete-command)
    * [Development](#development)
    * [License](#license)
 <!--te-->
@@ -50,14 +52,15 @@ If hl command does not work, use ./hl (Same with hourglass)
 
 ### Available
 
-* Board based tasks and notes.
-* Data is stored in SQLite database.
-* Specify due date.
+* Board based tasks and notes
+* Data is stored in SQLite database
+* Specify due date
 
 ### In Progress
 
-* Search
+* Filter
 * Move
+* GUI
 
 ## Usage
 
@@ -113,10 +116,28 @@ hl p
 ```
 
 #### Check Command
-##### Shortcut: hl c Expanded command: hourglass ch
+##### Shortcut: hl c Expanded command: hourglass check
 Command checks or un-checks tasks for the specified boards (Default Main)
 ```bash
 hl c 1,2 -b coding
+```
+
+
+#### Delete Command
+##### Shortcut: hl d Expanded command: hourglass delete
+To delete all the entries
+```bash
+hl d
+```
+
+To delete a board or multiple boards
+```bash
+hl d -b board1,board2
+```
+
+To delete entries from specific boards (Default Main)
+```bash
+hl d 1,2 -b board1,board2
 ```
 
 ## Development
