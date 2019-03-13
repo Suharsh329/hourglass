@@ -3,7 +3,6 @@
 namespace App\Helpers;
 
 
-
 class Helper
 {
     protected $db;
@@ -14,39 +13,41 @@ class Helper
     }
 
     /**
-     * Updates id of task or note after deleting or updating an entry
+     * Updates id of task or note after deleting or updating entries
      * @return void
      */
     public function updateId(): void
     {
-        $sql = "SELECT name FROM boards;";
+        $sql1 = "SELECT name FROM boards;";
 
-        $row = $this->db->query($sql);
+        $row = $this->db->query($sql1);
+
+        $sql2 = "SELECT id FROM tasks_notes WHERE board = :board;";
+
+        $stmt1 = $this->db->prepare($sql2);
+
+        $sql3 = "UPDATE tasks_notes SET id = :id WHERE id = :val AND board = :board;";
+
+        $stmt2 = $this->db->prepare($sql3);
 
         foreach($row as $board)
         {
-            $sql = "SELECT id FROM tasks_notes WHERE board = :board;";
+            $stmt1->bindParam(':board', $board['name']);
 
-            $stmt = $this->db->prepare($sql);
+            $stmt1->execute();
 
-            $stmt->bindParam(':board', $board['name']);
-
-            $stmt->execute();
+            $row = $stmt1->fetchAll();
 
             $i = 1;
 
-            $row = $stmt->fetchAll();
-
             foreach ($row as $id) {
-                $sql = "UPDATE tasks_notes SET id = :id WHERE id = :val;";
+                $stmt2->bindParam(':id', $i);
 
-                $stmt = $this->db->prepare($sql);
+                $stmt2->bindParam(':val', $id['id']);
 
-                $stmt->bindParam(':id', $i);
+                $stmt2->bindParam(':board', $board['name']);
 
-                $stmt->bindParam(':val', $id['id']);
-
-                $stmt->execute();
+                $stmt2->execute();
 
                 $i++;
             }
