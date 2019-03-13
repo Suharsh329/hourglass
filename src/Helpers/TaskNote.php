@@ -12,16 +12,20 @@ class TaskNote extends Helper
      */
     public function createTask(array $task): bool
     {
+        $insertValues = [
+            
+        ];
+
+        $sql = "INSERT INTO tasks_notes(id, description, date, due_date, type, board) VALUES(:id, :description, :date, :due_date, :type, :board)";
+
+        $stmt = $this->db->prepare($sql);
+
         foreach ($task['boards'] as $board) {
             if (!$this->boardExists($board)) {
                 $this->createBoard($board);
             }
 
             $id = $this->generateId($board);
-
-            $sql = "INSERT INTO tasks_notes(id, description, date, due_date, type, board) VALUES(:id, :description, :date, :due_date, :type, :board);";
-
-            $stmt = $this->db->prepare($sql);
 
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':description', $task['description']);
@@ -44,16 +48,16 @@ class TaskNote extends Helper
      */
     public function createNote(array $note): bool
     {
+        $sql = "INSERT INTO tasks_notes(id, description, date, type, board) VALUES(:id, :description, :date, :type, :board);";
+
+        $stmt = $this->db->prepare($sql);
+
         foreach ($note['boards'] as $board) {
             if (!$this->boardExists($board)) {
                 $this->createBoard($board);
             }
 
             $id = $this->generateId($board);
-
-            $sql = "INSERT INTO tasks_notes(id, description, date, type, board) VALUES(:id, :description, :date, :type, :board);";
-
-            $stmt = $this->db->prepare($sql);
 
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':description', $note['description']);

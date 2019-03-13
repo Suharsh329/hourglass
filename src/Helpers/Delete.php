@@ -28,12 +28,12 @@ class Delete extends Helper
      */
     public function boards(array $boards): bool
     {
+        $sql = "DELETE FROM boards WHERE name = :board;";
+
+        $stmt = $this->db->prepare($sql);
+
         foreach ($boards as $board) {
             $this->db->exec('PRAGMA foreign_keys = ON;');
-
-            $sql = "DELETE FROM boards WHERE name = :board;";
-
-            $stmt = $this->db->prepare($sql);
 
             $stmt->bindParam(':board', $board);
 
@@ -52,12 +52,12 @@ class Delete extends Helper
      */
     public function taskNote(array $values, array $boards): bool
     {
+        $sql = "DELETE FROM tasks_notes WHERE id = :id AND board = :board;";
+
+        $stmt = $this->db->prepare($sql);
+
         foreach ($boards as $board) {
             foreach ($values as $value) {
-                $sql = "DELETE FROM tasks_notes WHERE id = :id AND board = :board;";
-
-                $stmt = $this->db->prepare($sql);
-
                 $stmt->bindParam(':id', $value);
                 $stmt->bindParam(':board', $board);
 

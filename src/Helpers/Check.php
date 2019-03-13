@@ -13,11 +13,12 @@ class Check extends Helper
      */
     public function task(array $values, array $boards): bool
     {
+        $sql = "UPDATE tasks_notes SET completed = (1 - completed) WHERE id = :value AND board = :board;";
+
+        $stmt = $this->db->prepare($sql);
+
         foreach ($boards as $board) {
             foreach ($values as $value) {
-                $sql = "UPDATE tasks_notes SET completed = (1 - completed) WHERE id = :value AND board = :board;";
-
-                $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(':value', $value);
                 $stmt->bindParam(':board', $board);
 
