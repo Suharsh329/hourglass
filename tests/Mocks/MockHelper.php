@@ -55,7 +55,7 @@ class MockHelper extends Helper
         $stmt->bindParam(':id', $task['id']);
         $stmt->bindParam(':description', $task['description']);
         $stmt->bindParam(':date', $task['date']);
-        $stmt->bindParam(':due_date', $task['due']);
+        $stmt->bindParam(':due_date', $task['due_date']);
         $stmt->bindParam(':type', $task['type']);
         $stmt->bindParam(':board', $task['board']);
 
@@ -71,7 +71,7 @@ class MockHelper extends Helper
         $stmt->bindParam(':id', $note['id']);
         $stmt->bindParam(':description', $note['description']);
         $stmt->bindParam(':date', $note['date']);
-        $stmt->bindParam(':due_date', $note['due']);
+        $stmt->bindParam(':due_date', $note['due_date']);
         $stmt->bindParam(':type', $note['type']);
         $stmt->bindParam(':board', $note['board']);
 
