@@ -56,10 +56,10 @@ class PrintCommand extends Command
             if($board !== $entry['board']) {
                 $board = $entry['board'];
                 $output->writeln('');
-                $output->writeln("<comment>$board</comment>");
+                $output->writeln("\e[4m$board\e[0m");
             }
 
-            $output->write($entry['id']);
+            $output->write("  " . $entry['id']);
             $output->write(' ');
 
             if ($entry['type'] == 'task') {
