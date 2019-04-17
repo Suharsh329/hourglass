@@ -5,7 +5,7 @@
 Hourglass is a simple application that allows users to manage tasks and notes from the command line. And the best part, it's written in PHP!  
 A command line application written in PHP? WHY?!  
 The release of PHP 7 has truly changed the way we write code in the language and on top of that [Symfony](https://symfony.com/) provides a phenomenal interface for designing cli apps. PHP also has built-in support for SQLite; a self-contained, embedded database engine. PHP 7 + Relational Database seems like a good combo to me.   
-Moving on from the technical shenanigans, we know that developers spend a lot of time in the terminal. It's a convenient place to store and access data. A more streamlined workflow ensues when the developer uses the command line to keep track of their tasks and notes. Plus, having a to-do list in the terminal means there is more room for StackOverflow tabs in the browser.  
+Moving on from the technical jargon, we know that developers spend a lot of time in the terminal. It's a convenient place to store and access data. A more streamlined workflow ensues when the developer uses the command line to keep track of their tasks and notes. Plus, having a to-do list in the terminal means there is more room for StackOverflow tabs in the browser.  
 
 ## Table of Contents
 
@@ -22,6 +22,7 @@ Moving on from the technical shenanigans, we know that developers spend a lot of
         * [Print Command](#print-command)
         * [Check Command](#check-command)
         * [Delete Command](#delete-command)
+        * [Update Command](#update-command)
    * [Development](#development)
    * [License](#license)
 <!--te-->
@@ -55,11 +56,13 @@ If hl command does not work, use ./hl (Same with hourglass)
 * Board based tasks and notes
 * Data is stored in SQLite database
 * Specify due date
+* Update entry details
 
 ### In Progress
 
-* Filter
 * Move
+* Filter
+* Pomodoro
 * GUI
 
 ## Usage
@@ -78,39 +81,40 @@ hl t This is a task -b Coding [Adds a task to the coding board]
 
 #### Task Command  
 ##### Shortcut: hl t Expanded command: hourglass task  
-Without a board specified, the task belongs to the Main board.
+Without a board specified, the task belongs to the Main board
 ```bash
 hl t My first task
 ```
 
-With a board specified; a new board will be created if it does not exist.
+With a board specified; a new board will be created if it does not exist
 ```bash
 hl t My first task -b board1,board2
 ```
-Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)  
+*Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)* 
 
-Specify due date of task. Default Indefinite.  
+Specify due date of task (Default Indefinite)  
 ```bash
-hl t My first task -d 5
+hl t My first task -d 5 
 ```
-The task is due in 5 days.
+*The task is due in 5 day.*
 
 #### Note Command  
 ##### Shortcut: hl n Expanded command: hourglass note  
-Without a board specified, the note belongs to the Main board.
+Without a board specified, the note belongs to the Main board
 ```bash
 hl n My first note
 ```
 
-With a board specified; a new board will be created if it does not exist.
+With a board specified; a new board will be created if it does not exist  
 ```bash
 hl n My first note -b Board1,Board2
 ```
-Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)  
+*Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)*
+  
 
 #### Print Command  
 ##### Shortcut: hl p Expanded command: hourglass print  
-Prints out board-wise tasks and notes.
+Prints out board-wise tasks and notes
 ```bash
 hl p
 ```
@@ -121,7 +125,6 @@ Command checks or un-checks tasks for the specified boards (Default Main)
 ```bash
 hl c 1,2 -b coding
 ```
-
 
 #### Delete Command
 ##### Shortcut: hl d Expanded command: hourglass delete
@@ -139,6 +142,30 @@ To delete entries from specific boards (Default Main)
 ```bash
 hl d 1,2 -b board1,board2
 ```
+
+#### Update Command
+##### Shortcut: hl u Expanded command: hourglass update
+To update task or note description, provide id of entry and new description  
+Default board is Main
+```bash
+hl u 1 Updated description -b board
+```
+
+To change task to note or note to task
+```bash
+hl u 1 -c note
+```
+*Provide the id and specify task or note.    
+On changing task to note, due date will change to 'Indefinite' and the task will be un-checked*
+
+To update due date
+```bash
+hl u 1 -d 5
+```
+*Number after **-d** is the number of days due from the day it is updated  
+To specify current day as due date, enter 00  
+To remove due date enter 000*  
+**You cannot specify due date for a note**
 
 ## Development
 
