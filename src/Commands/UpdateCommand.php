@@ -31,7 +31,7 @@ class UpdateCommand extends Command
             ->addOption(
                 'change',
                 'c',
-                InputOption::VALUE_OPTIONAL,
+                InputOption::VALUE_NONE,
                 'Change task to note or vice-versa.'
             )
             ->addOption(
@@ -59,6 +59,21 @@ class UpdateCommand extends Command
             $board = $input->getOption('board');
         }
 
+        // Renaming a board
+        if (!ctype_digit($id)) {
+            if ($board === 'Main') {
+                $output->writeln("<comment>Cannot rename board: Main</comment>");
+                return;
+            }
+            if ($this->update->board($id, $board)) {
+                $output->writeln("<info>Board name updated</info>");
+            } else {
+                $output->writeln("<comment>Board name could not be updated</comment>");
+            }
+            return;
+        }
+
+        // Update task description
         if ($input->getArgument('text')) {
             $text = implode(' ', $input->getArgument('text'));
 
@@ -69,21 +84,16 @@ class UpdateCommand extends Command
             }
         }
 
+        // Change task to note and vice-versa
         if ($input->getOption('change')) {
-            $value = $input->getOption('change');
-
-            if ($value !== 'note' && $value !== 'task') {
-                $output->writeln("<comment>Type can only be of task or note</comment>");
-                return;
-            }
-
-            if ($this->update->change($id, $value, $board)) {
+            if ($this->update->change($id, $board)) {
                 $output->writeln("<info>Type updated</info>");
             } else {
                 $output->writeln("<comment>Type could not be updated</comment>");
             }
         }
 
+        // Update due date
         if ($input->getOption('due')) {
             if (!$this->update->isValidNumber($input->getOption('due'))) {
                 $output->writeln("<comment>Please enter a valid number</comment>");
