@@ -23,6 +23,8 @@ Moving on from the technical jargon, we know that developers spend a lot of time
         * [Check Command](#check-command)
         * [Delete Command](#delete-command)
         * [Update Command](#update-command)
+   * [Backup](#backup)
+   * [Settings](#settings)
    * [Development](#development)
    * [License](#license)
 <!--te-->
@@ -153,10 +155,9 @@ hl u 1 Updated description -b board
 
 To change task to note or note to task
 ```bash
-hl u 1 -c note
+hl u 1 --change
 ```
-*Provide the id and specify task or note.    
-On changing task to note, due date will change to 'Indefinite' and the task will be un-checked*
+*On changing task to note, due date will change to 'Indefinite' and the task will be un-checked*
 
 To update due date
 ```bash
@@ -166,6 +167,36 @@ hl u 1 -d 5
 To specify current day as due date, enter 00  
 To remove due date enter 000*  
 **You cannot specify due date for a note**
+
+To update board name, provide the new name  
+Default board is Main
+```bash
+hl u board2 -b board
+```
+
+Update all in one line
+```bash
+hl u 1 Updated description -d 5 --change -b board
+```
+
+##Backup
+How do I use the application on multiple devices with the same database and keep a backup of the database?   
+One option is to store the backup on an external hard-drive, but to use that copy for multiple devices can become cumbersome.  
+Another option is to store it on the cloud. Most cloud platforms come with desktop applications that allow the user to sync data between a specific local folder and the user's cloud account.  
+I suggest looking at this option as it is easier to get started with.
+#####Cloud Platforms
+*Google Drive - only for Mac and Windows*  
+*Dropbox - supports all platforms*  
+
+There are many others but I have not checked them out.
+
+#####Accessing the database file
+If you do choose to sync the file using the above mentioned method, then the question arises, how will the application know where to look for the database file?  
+The location of the file can be put in the `settings.json` file. Look at the next section for more details.
+
+##Settings
+The settings usage for this application has still not been implemented as of yet. I will be working on it alongside the other in-progress work, but it might not be a part of the first version.  
+The main point of creating a settings file is to allow the user to have more flexibility. I'm looking to add settings for color scheme, database file location, etc.  
 
 ## Development
 
