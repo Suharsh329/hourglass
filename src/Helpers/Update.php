@@ -29,26 +29,63 @@ class Update extends Helper
     }
 
     /**
-     * @param string $id
      * @param string $value
      * @param string $board
      * @return bool
      */
-    public function change(string $id, string $value, string $board): bool
+    public function board(string $value, string $board): bool
     {
-        if ($value === 'note') {
-            $sql = "UPDATE tasks_notes SET type = :value, completed = 0, due_date = 'Indefinite' WHERE id = :id AND board = :board;";
-        } else {
-            $sql = "UPDATE tasks_notes SET type = :value WHERE id = :id AND board = :board;";
-        }
+        $sql = "UPDATE boards SET name = :value WHERE name = :board;";
 
         $stmt = $this->db->prepare($sql);
 
-        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':value', $value);
         $stmt->bindParam(':board', $board);
 
+        $this->db->exec('PRAGMA foreign_keys = ON;');
+
         if (!$stmt->execute()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param string $id
+     * @param string $board
+     * @return bool
+     */
+    public function change(string $id, string $board): bool
+    {
+        $sql = "SELECT type FROM tasks_notes WHERE id = :id AND board = :board;";
+
+        $stmt1 = $this->db->prepare($sql);
+
+        $stmt1->bindParam(':id', $id);
+        $stmt1->bindParam(':board', $board);
+
+        $stmt1->execute();
+
+        $row = $stmt1->fetch();
+
+        $value = $row['type'];
+
+        if ($value === 'note') {
+            $sql = "UPDATE tasks_notes SET type = :value, completed = 0, due_date = 'Indefinite' WHERE id = :id AND board = :board;";
+            $value = 'task';
+        } else {
+            $sql = "UPDATE tasks_notes SET type = :value WHERE id = :id AND board = :board;";
+            $value = 'note';
+        }
+
+        $stmt2 = $this->db->prepare($sql);
+
+        $stmt2->bindParam(':id', $id);
+        $stmt2->bindParam(':value', $value);
+        $stmt2->bindParam(':board', $board);
+
+        if (!$stmt2->execute()) {
             return false;
         }
 
@@ -74,6 +111,39 @@ class Update extends Helper
         if (!$stmt->execute()) {
             return false;
         }
+
+        return true;
+    }
+
+    /**
+     * @param array $id
+     * @param string $to
+     * @param string $from
+     * @return bool
+     */
+    public function move(array $id, string $to, string $from): bool
+    {
+        if (!$this->boardExists($to)) {
+            $this->createBoard($to);
+        }
+
+        $sql = "UPDATE tasks_notes SET id = :newId, board = :to WHERE id = :id AND board = :from;";
+
+        $stmt = $this->db->prepare($sql);
+
+        foreach ($id as $_id) {
+            $newId = $this->generateId($to); // Assures that the entry moved will always be the last entry in the new board
+            $stmt->bindParam(':newId', $newId);
+            $stmt->bindParam(':to', $to);
+            $stmt->bindParam(':id', $_id);
+            $stmt->bindParam(':from', $from);
+
+            if (!$stmt->execute()) {
+                return false;
+            }
+        }
+
+        $this->updateId();
 
         return true;
     }
