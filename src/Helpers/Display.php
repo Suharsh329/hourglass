@@ -43,7 +43,7 @@ class Display extends Helper
     {
         $entries = [];
 
-        $stmt = $this->db->query("SELECT * FROM tasks_notes ORDER BY board;");
+        $stmt = $this->db->query("SELECT * FROM tasks_notes ORDER BY board, id;");
 
         while ($row = $stmt->fetch()) {
             $interval = 'Indefinite';

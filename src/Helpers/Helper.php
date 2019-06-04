@@ -22,7 +22,7 @@ class Helper
 
         $row = $this->db->query($sql1);
 
-        $sql2 = "SELECT id FROM tasks_notes WHERE board = :board;";
+        $sql2 = "SELECT id FROM tasks_notes WHERE board = :board ORDER BY id;";
 
         $stmt1 = $this->db->prepare($sql2);
 
