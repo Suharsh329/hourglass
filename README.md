@@ -4,7 +4,7 @@
 
 Hourglass is a simple application that allows users to manage tasks and notes from the command line. And the best part, it's written in PHP!  
 A command line application written in PHP? WHY?!  
-The release of PHP 7 has truly changed the way we write code in the language and on top of that [Symfony](https://symfony.com/) provides a phenomenal interface for designing cli apps. PHP also has built-in support for SQLite; a self-contained, embedded database engine. PHP 7 + Relational Database seems like a good combo to me.   
+The release of PHP 7 has truly changed the way we write code in the language and on top of that, [Symfony](https://symfony.com/), provides a phenomenal interface for designing cli apps. PHP also has built-in support for SQLite; a self-contained, embedded database engine. PHP 7 + Relational Database seems like a good combo to me.   
 Moving on from the technical jargon, we know that developers spend a lot of time in the terminal. It's a convenient place to store and access data. A more streamlined workflow ensues when the developer uses the command line to keep track of their tasks and notes. Plus, having a to-do list in the terminal means there is more room for StackOverflow tabs in the browser.  
 
 ## Table of Contents
@@ -23,6 +23,7 @@ Moving on from the technical jargon, we know that developers spend a lot of time
         * [Check Command](#check-command)
         * [Delete Command](#delete-command)
         * [Update Command](#update-command)
+        * [Move Command](#move-command)
    * [Backup](#backup)
    * [Settings](#settings)
    * [Development](#development)
@@ -59,13 +60,17 @@ If hl command does not work, use ./hl (Same with hourglass)
 * Data is stored in SQLite database
 * Specify due date
 * Update entry details
+* Move entries across boards
 
 ### In Progress
 
-* Move
 * Filter
 * Pomodoro
 * GUI
+* Settings
+* Views
+* Archives
+* Statistics
 
 ## Usage
 
@@ -179,22 +184,30 @@ Update all in one line
 hl u 1 Updated description -d 5 --change -b board
 ```
 
-##Backup
+#### Move Command
+##### Shortcut: hl m Expanded command: hourglass move
+Move one or more entries to board2 from board1
+```bash
+hl m 1,2 -b board2,board1
+```
+*A new board will be created if it does not exist*
+
+## Backup
 How do I use the application on multiple devices with the same database and keep a backup of the database?   
 One option is to store the backup on an external hard-drive, but to use that copy for multiple devices can become cumbersome.  
 Another option is to store it on the cloud. Most cloud platforms come with desktop applications that allow the user to sync data between a specific local folder and the user's cloud account.  
-I suggest looking at this option as it is easier to get started with.
-#####Cloud Platforms
+I suggest looking at this option as it is easy to get started with.
+##### Cloud Platforms
 *Google Drive - only for Mac and Windows*  
 *Dropbox - supports all platforms*  
 
 There are many others but I have not checked them out.
 
-#####Accessing the database file
+##### Accessing the database file
 If you do choose to sync the file using the above mentioned method, then the question arises, how will the application know where to look for the database file?  
 The location of the file can be put in the `settings.json` file. Look at the next section for more details.
 
-##Settings
+## Settings
 The settings usage for this application has still not been implemented as of yet. I will be working on it alongside the other in-progress work, but it might not be a part of the first version.  
 The main point of creating a settings file is to allow the user to have more flexibility. I'm looking to add settings for color scheme, database file location, etc.  
 
