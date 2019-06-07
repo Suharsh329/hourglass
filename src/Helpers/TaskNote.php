@@ -12,10 +12,6 @@ class TaskNote extends Helper
      */
     public function createTask(array $task): bool
     {
-        $insertValues = [
-            
-        ];
-
         $sql = "INSERT INTO tasks_notes(id, description, date, due_date, type, board) VALUES(:id, :description, :date, :due_date, :type, :board)";
 
         $stmt = $this->db->prepare($sql);
