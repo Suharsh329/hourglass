@@ -47,9 +47,15 @@ class PomodoroCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $task = 'Activity';
+        $task = '';
+        $board = 'Main';
+
+        if ($input->getOption('board')) {
+            $board = $input->getOption('board');
+        }
+
         if ($input->getArgument('task')) {
-            $task = $this->pomodoro->getTask($input->getArgument('task'));
+            $task = $this->pomodoro->getTask($input->getArgument('task'), $board);
         }
 
         $aTime = 25;
@@ -71,16 +77,16 @@ class PomodoroCommand extends Command
         $progressBar->start();
         for ($i = 0; $i < $activityTime; $i++) {
             if ($i <= $activityTime / 2) {
-                $progressBar->setMessage($task . "Started", 'status');
-            } elseif ($i > $activityTime / 2 && $i <= 3 * $activityTime / 4) {
-                $progressBar->setMessage($task . "Halfway there", 'status');
+                $progressBar->setMessage($task . " - Started", 'status');
+            } else if ($i > $activityTime / 2 && $i <= 3 * $activityTime / 4) {
+                $progressBar->setMessage($task . " - Halfway there", 'status');
             } else {
-                $progressBar->setMessage($task . "Almost there", 'status');
+                $progressBar->setMessage($task . " - Almost there", 'status');
             }
             $progressBar->advance();
             usleep(100000);
         }
-        $progressBar->setMessage("Completed", 'status');
+        $progressBar->setMessage($task . " - Completed", 'status');
         $progressBar->finish();
 
         $output->writeln("");
