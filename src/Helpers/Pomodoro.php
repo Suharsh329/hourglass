@@ -6,7 +6,7 @@ namespace App\Helpers;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Pomodoro
+class Pomodoro extends Helper
 {
 
     /**
@@ -33,10 +33,22 @@ class Pomodoro
 
     /**
      * @param int $id
+     * @param string $board
      * @return string
      */
-    public function getTask(int $id): string
+    public function getTask(int $id, string $board): string
     {
-        return "";
+        $sql = "SELECT description FROM tasks_notes WHERE id = :id AND board = :board;";
+
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':board', $board);
+
+        $stmt->execute();
+
+        $row = $stmt->fetch();
+
+        return $row['description'];
     }
 }
