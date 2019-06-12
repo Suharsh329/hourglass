@@ -103,7 +103,7 @@ Specify due date of task (Default Indefinite)
 ```bash
 hl t My first task -d 5 
 ```
-*The task is due in 5 day.*
+*The task is due in 5 days*
 
 #### Note Command  
 ##### Shortcut: hl n Expanded command: hourglass note  
