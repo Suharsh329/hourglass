@@ -17,13 +17,16 @@ Moving on from the technical jargon, we know that developers spend a lot of time
    * [Usage](#usage)
       * [Examples](#examples)
       * [List of Commands](#list-of-commands)
-        * [Task Command](#task-command)
-        * [Note Command](#note-command)
-        * [Print Command](#print-command)
-        * [Check Command](#check-command)
-        * [Delete Command](#delete-command)
-        * [Update Command](#update-command)
-        * [Move Command](#move-command)
+	      * [List Command](#list-command)
+	      * [Help Command](#help-command)
+         * [Task Command](#task-command)
+         * [Note Command](#note-command)
+         * [Print Command](#print-command)
+         * [Check Command](#check-command)
+         * [Delete Command](#delete-command)
+         * [Update Command](#update-command)
+         * [Move Command](#move-command)
+	      * [Pomodoro Command](#pomodoro-command)
    * [Backup](#backup)
    * [Settings](#settings)
    * [Development](#development)
@@ -77,14 +80,32 @@ If hl command does not work, use ./hl (Same with hourglass)
 ### Examples
 
 ```bash
-hl [Lists all avaialble commands and options]  
+hl l [Lists all available commands and options]  
 
-hl p [Displays all tasks and notes]  
+hl [Displays all tasks and notes]  
 
 hl t This is a task -b Coding [Adds a task to the coding board]
 ```
 
 ### List of Commands
+
+#### List Command
+##### Shortcut: hl l Expanded command: hourglass list
+Displays application name and version along with list of commands and display options
+
+#### Help Command
+##### Shortcut: hl h Expanded command: hourglass help
+General overview of help
+```bash
+hl h
+```
+
+Help for a specific command
+```bash
+hl h t
+hl h task
+```
+*Specify the first letter of the command or the whole command*
 
 #### Task Command  
 ##### Shortcut: hl t Expanded command: hourglass task  
@@ -120,10 +141,11 @@ hl n My first note -b Board1,Board2
   
 
 #### Print Command  
-##### Shortcut: hl p Expanded command: hourglass print  
+##### Shortcut: hl / hl x Expanded command: hourglass xprint  
 Prints out board-wise tasks and notes
 ```bash
-hl p
+hl
+hl x
 ```
 
 #### Check Command
@@ -191,6 +213,9 @@ Move one or more entries to board2 from board1
 hl m 1,2 -b board2,board1
 ```
 *A new board will be created if it does not exist*
+
+#### Pomodoro Command
+##### Shortcut: hl p Expanded command: hourglass pomodoro
 
 ## Backup
 How do I use the application on multiple devices with the same database and keep a backup of the database?   
