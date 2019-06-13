@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PomodoroCommand extends Command
 {
-    protected static $defaultName = 'omodoro';
+    protected static $defaultName = 'pomodoro';
 
     protected $pomodoro;
 
@@ -35,7 +35,7 @@ class PomodoroCommand extends Command
                 'rest',
                 'r',
                 InputOption::VALUE_OPTIONAL,
-                'Specify rest break time'
+                'Specify rest time'
             )
             ->addOption(
                 'board',
@@ -47,7 +47,7 @@ class PomodoroCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $task = '';
+        $task = 'Activity';
         $board = 'Main';
 
         if ($input->getOption('board')) {

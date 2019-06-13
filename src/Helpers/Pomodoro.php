@@ -19,7 +19,7 @@ class Pomodoro extends Helper
     {
         $progressBar = new ProgressBar($output, $activityTime);
         $progressBar->setFormat(
-            "<fg=cyan;bg=default>Activity - %status:-45s%</>\n %bar%\n%elapsed%\n"
+            "<fg=cyan;bg=default>%status:-45s%</>\n %bar%\n%elapsed%\n"
         );
         $progressBar->setBarCharacter('<fg=green>⚬</>');
         $progressBar->setEmptyBarCharacter("<fg=red>⚬</>");
