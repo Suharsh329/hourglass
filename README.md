@@ -141,11 +141,10 @@ hl n My first note -b Board1,Board2
   
 
 #### Print Command  
-##### Shortcut: hl / hl x Expanded command: hourglass xprint  
+##### Shortcut: hl Expanded command: hourglass
 Prints out board-wise tasks and notes
 ```bash
 hl
-hl x
 ```
 
 #### Check Command

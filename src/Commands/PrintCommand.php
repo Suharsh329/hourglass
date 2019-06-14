@@ -11,7 +11,7 @@ use Symfony\Component\Console\Helper\FormatterHelper;
 
 class PrintCommand extends Command
 {
-    protected static $defaultName = 'xprint';
+    protected static $defaultName = '_print';
 
     protected $display;
 

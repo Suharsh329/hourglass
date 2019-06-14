@@ -34,7 +34,7 @@ foreach ($container->getParameter('console.command.ids') as $id) {
 }
 $application->setCommandLoader($commandLoader);
 
-$application->setDefaultCommand('xprint');
+$application->setDefaultCommand('_print');
 
 try {
     $application->run();

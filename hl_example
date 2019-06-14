@@ -34,6 +34,8 @@ foreach ($container->getParameter('console.command.ids') as $id) {
 }
 $application->setCommandLoader($commandLoader);
 
+$application->setDefaultCommand('_print');
+
 try {
     $application->run();
 } catch (Exception $e) {
