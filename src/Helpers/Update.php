@@ -58,34 +58,14 @@ class Update extends Helper
      */
     public function change(string $id, string $board): bool
     {
-        $sql = "SELECT type FROM tasks_notes WHERE id = :id AND board = :board;";
+        $sql = "UPDATE tasks_notes SET type = CASE WHEN type = 'note' THEN 'task' ELSE 'note' END, completed = 0, due_date = 'Indefinite' WHERE id = :id AND board = :board;";
 
-        $stmt1 = $this->db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
 
-        $stmt1->bindParam(':id', $id);
-        $stmt1->bindParam(':board', $board);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':board', $board);
 
-        $stmt1->execute();
-
-        $row = $stmt1->fetch();
-
-        $value = $row['type'];
-
-        if ($value === 'note') {
-            $sql = "UPDATE tasks_notes SET type = :value, completed = 0, due_date = 'Indefinite' WHERE id = :id AND board = :board;";
-            $value = 'task';
-        } else {
-            $sql = "UPDATE tasks_notes SET type = :value WHERE id = :id AND board = :board;";
-            $value = 'note';
-        }
-
-        $stmt2 = $this->db->prepare($sql);
-
-        $stmt2->bindParam(':id', $id);
-        $stmt2->bindParam(':value', $value);
-        $stmt2->bindParam(':board', $board);
-
-        if (!$stmt2->execute()) {
+        if (!$stmt->execute()) {
             return false;
         }
 
