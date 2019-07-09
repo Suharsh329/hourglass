@@ -215,6 +215,19 @@ hl m 1,2 -b board2,board1
 
 #### Pomodoro Command
 ##### Shortcut: hl p Expanded command: hourglass pomodoro
+Start pomodoro timer  
+Timer for 15 minutes
+```
+hl p -t 15
+```
+*Default time is 25 minutes*
+
+Specify task id to complete a specific task  
+Default board is Main
+```
+hl p 1 -b board
+```
+*On completion of timer, the task will be tick-marked. (Not implemented yet)*
 
 ## Backup
 How do I use the application on multiple devices with the same database and keep a backup of the database?   
