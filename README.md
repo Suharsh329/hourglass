@@ -27,7 +27,7 @@ Moving on from the technical jargon, we know that developers spend a lot of time
          * [Update Command](#update-command)
          * [Move Command](#move-command)
 	      * [Pomodoro Command](#pomodoro-command)
-   * [Backup](#backup)
+   * [Backup & Sync](#backup-&-sync)
    * [Settings](#settings)
    * [Development](#development)
    * [License](#license)
@@ -69,11 +69,10 @@ If hl command does not work, use ./hl (Same with hourglass)
 
 * Filter
 * Pomodoro
-* GUI
-* Settings
-* Views
-* Archives
 * Statistics
+* Settings
+* Archives
+* GUI
 
 ## Usage
 
@@ -118,7 +117,7 @@ With a board specified; a new board will be created if it does not exist
 ```bash
 hl t My first task -b board1,board2
 ```
-*Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)* 
+*Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)*
 
 Specify due date of task (Default Indefinite)  
 ```bash
@@ -138,7 +137,6 @@ With a board specified; a new board will be created if it does not exist
 hl n My first note -b Board1,Board2
 ```
 *Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)*
-  
 
 #### Print Command  
 ##### Shortcut: hl Expanded command: hourglass
@@ -229,9 +227,9 @@ hl p 1 -b board
 ```
 *On completion of timer, the task will be tick-marked. (Not implemented yet)*
 
-## Backup
-How do I use the application on multiple devices with the same database and keep a backup of the database?   
-One option is to store the backup on an external hard-drive, but to use that copy for multiple devices can become cumbersome.  
+## Backup & Sync
+How do I synchronize the application on multiple devices and keep a backup of the database?   
+One option is to store the backup on an external hard-drive, but to use that copy for multiple devices can become tedious.  
 Another option is to store it on the cloud. Most cloud platforms come with desktop applications that allow the user to sync data between a specific local folder and the user's cloud account.  
 I suggest looking at this option as it is easy to get started with.
 ##### Cloud Platforms
