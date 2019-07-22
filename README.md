@@ -26,6 +26,7 @@ Moving on from the technical jargon, we know that developers spend a lot of time
          * [Delete Command](#delete-command)
          * [Update Command](#update-command)
          * [Move Command](#move-command)
+         * [Filter Command](#filter-command)
 	      * [Pomodoro Command](#pomodoro-command)
    * [Backup & Sync](#backup-&-sync)
    * [Settings](#settings)
@@ -64,10 +65,10 @@ If hl command does not work, use ./hl (Same with hourglass)
 * Specify due date
 * Update entry details
 * Move entries across boards
+* Filter entries
 
 ### In Progress
 
-* Filter
 * Pomodoro
 * Statistics
 * Settings
@@ -193,7 +194,7 @@ To remove due date enter 000*
 **You cannot specify due date for a note**
 
 To update board name, provide the new name  
-Default board is Main
+**You cannot rename board 'Main'**
 ```bash
 hl u board2 -b board
 ```
@@ -211,18 +212,53 @@ hl m 1,2 -b board2,board1
 ```
 *A new board will be created if it does not exist*
 
+#### Filter Command
+##### Shortcut: hl f Expanded command: hourglass filter
+Filter entries alphabetically
+```bash
+hl f a
+```
+*Entries will still be displayed board-wise*
+
+Filter tasks with due-dates
+```bash
+hl f d
+```
+
+Filter tasks with due-dates within 'x' number of days
+```bash
+hl f d 5
+```
+*The above command will display tasks due in the next 5 days*
+
+Filter notes
+```bash
+hl f n
+```
+
+Filter tasks
+```bash
+hl f t
+```
+
+Filter tasks as complete or incomplete
+```bash
+hl f t c
+hl f t i
+```
+
 #### Pomodoro Command
 ##### Shortcut: hl p Expanded command: hourglass pomodoro
 Start pomodoro timer  
 Timer for 15 minutes
-```
+```bash
 hl p -t 15
 ```
 *Default time is 25 minutes*
 
 Specify task id to complete a specific task  
 Default board is Main
-```
+```bash
 hl p 1 -b board
 ```
 *On completion of timer, the task will be tick-marked. (Not implemented yet)*
@@ -245,6 +281,21 @@ The location of the file can be put in the `settings.json` file. Look at the nex
 ## Settings
 The settings usage for this application has still not been implemented as of yet. I will be working on it alongside the other in-progress work, but it might not be a part of the first version.  
 The main point of creating a settings file is to allow the user to have more flexibility. I'm looking to add settings for color scheme, database file location, etc.  
+Currently the settings.json file looks like this:
+```json
+{
+  "db-path": "~/hourglass/",
+  // white, magenta, black, red, cyan, green, yellow, default
+  "color": {
+     "board": "white",
+     "numbers": "white",
+     "text": "cyan",
+     "icon": "white",
+     "background": "default",
+  }
+}
+```
+**Changing values in this file will not reflect in the application for the time being**
 
 ## Development
 
