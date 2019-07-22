@@ -285,7 +285,7 @@ Currently the settings.json file looks like this:
 ```json
 {
   "db-path": "~/hourglass/",
-  // white, magenta, black, red, cyan, green, yellow, default
+  "_comment": "Colors can be white, magenta, black, red, cyan, green, yellow, default",
   "color": {
      "board": "white",
      "numbers": "white",
