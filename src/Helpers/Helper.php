@@ -13,6 +13,20 @@ class Helper
     }
 
     /**
+     * Returns the number of days till task is due
+     * @param string $due
+     * @return string
+     */
+    public function getRemainingDays(string $due): string
+    {
+        $interval = date_diff(
+            date_create(date('Y-m-d')), // Today's date
+            date_create(date('Y-m-d', strtotime($due))), // Due date
+            false); // Absolute value
+        return $interval->format('%R%a');
+    }
+
+    /**
      * Updates id of task or note after deleting or updating entries
      * @return void
      */

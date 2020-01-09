@@ -2,24 +2,8 @@
 
 namespace App\Helpers;
 
-
 class Display extends Helper
 {
-
-    /**
-     * Returns the number of days till task is due
-     * @param string $due
-     * @return string
-     */
-    public function getRemainingDays(string $due): string
-    {
-        $interval = date_diff(
-            date_create(date('Y-m-d')), // Today's date
-            date_create(date('Y-m-d', strtotime($due))), // Due date
-            false); // Absolute value
-        return $interval->format('%R%a');
-    }
-
     /**
      * Checks if the database has any tasks or notes
      * @return bool
@@ -48,7 +32,7 @@ class Display extends Helper
         while ($row = $stmt->fetch()) {
             $interval = 'Indefinite';
 
-            if($row['due_date'] !== 'Indefinite') {
+            if ($row['due_date'] !== 'Indefinite') {
                 $interval = intval($this->getRemainingDays($row['due_date']));
             }
 
