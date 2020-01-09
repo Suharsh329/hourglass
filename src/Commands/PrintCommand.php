@@ -19,7 +19,6 @@ class PrintCommand extends Command
     protected $checked = "\xE2\x9C\x93  ";
     protected $note = "\xE2\x97\x88  ";
 
-
     public function __construct(Display $display)
     {
         $this->display = $display;
@@ -44,7 +43,7 @@ class PrintCommand extends Command
         $output->getFormatter()->setStyle('warning', $warningStyle);
 
         if (!$this->display->hasEntries()) {
-            $output->writeln($format->formatBlock(["Type `hourglass` to get started! \xE2\x8C\x9B"], 'text', TRUE));
+            $output->writeln($format->formatBlock(["Type `hourglass list` to get started! \xE2\x8C\x9B"], 'text', TRUE));
             return;
         }
 
@@ -53,7 +52,7 @@ class PrintCommand extends Command
         $board = '';
 
         foreach ($entries as $entry) {
-            if($board !== $entry['board']) {
+            if ($board !== $entry['board']) {
                 $board = $entry['board'];
                 $output->writeln('');
                 $output->writeln("\e[4m$board\e[0m");
