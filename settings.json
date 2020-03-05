@@ -1,11 +1,13 @@
 {
-    "db-path": "~/hourglass/",
+    "dbDirectory": "~/.hourglass/",
     "_comment": "Colors can be white, magenta, black, red, cyan, green, yellow, default",
     "color": {
         "board": "white",
         "numbers": "white",
         "text": "cyan",
         "icon": "white",
-        "background": "default",
-    }
+        "background": "default"
+    },
+    "storage": "local",
+    "archive": true
 }
