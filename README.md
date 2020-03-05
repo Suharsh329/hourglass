@@ -28,6 +28,7 @@ Moving on from the technical jargon, we know that developers spend a lot of time
          * [Move Command](#move-command)
          * [Filter Command](#filter-command)
 	      * [Pomodoro Command](#pomodoro-command)
+	      * [Generate Database Command](#generate-database-command)
    * [Backup & Sync](#backup-&-sync)
    * [Settings](#settings)
    * [Development](#development)
@@ -49,7 +50,7 @@ cd hourglass
 
 composer install
 
-cat hourglass.sql | sqlite3 hourglass.db
+./hl generate
 ```
 
 Allow hl and hourglass files to be executable  
@@ -262,6 +263,19 @@ Default board is Main
 hl p 1 -b board
 ```
 *On completion of timer, the task will be tick-marked. (Not implemented yet)*
+
+#### Generate Database Command
+##### Shortcut: hl g Expanded command: hourglass generate
+Generate database file in case of user deleted the database or wants extra databases. 
+```bash
+hl g
+```
+*Default path is /home/username/.hourglass*
+
+Specify path  
+```bash
+hl g /path/for/new/database
+```
 
 ## Backup & Sync
 How do I synchronize the application on multiple devices and keep a backup of the database?   
