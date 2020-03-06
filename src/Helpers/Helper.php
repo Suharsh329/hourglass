@@ -27,7 +27,7 @@ class Helper
     }
 
     /**
-     * Updates id of task or note after deleting or updating entries
+     * Updates id of tasks and notes after deleting or updating entries
      * @return void
      */
     public function updateId(): void
@@ -44,8 +44,7 @@ class Helper
 
         $stmt2 = $this->db->prepare($sql3);
 
-        foreach($row as $board)
-        {
+        foreach($row as $board) {
             $stmt1->bindParam(':board', $board['name']);
 
             $stmt1->execute();
@@ -63,7 +62,7 @@ class Helper
 
                 $stmt2->execute();
 
-                $i++;
+				$i++;
             }
         }
     }
@@ -84,7 +83,7 @@ class Helper
         $stmt->execute();
 
         $row = $stmt->fetch();
-        if($row === NULL) {
+        if ($row === NULL) {
             return 1;
         }
 
@@ -169,7 +168,7 @@ class Helper
 
         foreach ($boards as $board) {
             $val = strtolower($board);
-            if(strpos($val, "main") !== false) {
+            if (strpos($val, "main") !== false) {
                 $val = "Main";
             }
             array_push($temp, $val);
