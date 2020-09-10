@@ -99,13 +99,18 @@ class Update extends Helper
      * @param array $id
      * @param string $to
      * @param string $from
+     * @param bool $copy
      * @return bool
      */
-    public function move(array $id, string $to, string $from): bool
+    public function move(array $id, string $to, string $from, bool $copy = false): bool
     {
         if (!$this->boardExists($to)) {
             $this->createBoard($to);
-        }
+		}
+
+		//if ($copy === true) {
+		//	$sql = "INSERT INTO tasks_notes VALUES()";
+		//}
 
         $sql = "UPDATE tasks_notes SET id = :newId, board = :to WHERE id = :id AND board = :from;";
 

@@ -136,7 +136,7 @@ hl n My first note
 
 With a board specified; a new board will be created if it does not exist  
 ```bash
-hl n My first note -b Board1,Board2
+hl n My first note -b board1,board2
 ```
 *Each board name is separated by a comma with no spaces (hyphens and underscores are allowed)*
 

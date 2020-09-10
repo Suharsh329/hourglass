@@ -73,6 +73,9 @@ class FilterCommand extends Command
             case 't':
                 $view = $this->filter->tasks($value, $board);
                 break;
+            case 'u':
+                $view = $this->filter->userDefined($value, $board);
+                break;
         }
 
         $textStyle = new OutputFormatterStyle('cyan', 'default');

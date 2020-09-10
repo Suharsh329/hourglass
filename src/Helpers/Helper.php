@@ -30,9 +30,9 @@ class Helper
      * Updates id of tasks and notes after deleting or updating entries
      * @return void
      */
-    public function updateId(): void
+    public function updateId(string $board='boards'): void
     {
-        $sql1 = "SELECT name FROM boards;";
+        $sql1 = "SELECT name FROM $board;";
 
         $row = $this->db->query($sql1);
 

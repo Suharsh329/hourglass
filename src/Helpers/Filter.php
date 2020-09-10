@@ -30,7 +30,7 @@ class Filter extends Helper
         while ($row = $stmt->fetch()) {
             $interval = 'Indefinite';
 
-            if($row['due_date'] !== 'Indefinite') {
+            if ($row['due_date'] !== 'Indefinite') {
                 $interval = intval($this->getRemainingDays($row['due_date']));
             }
 
@@ -148,10 +148,10 @@ class Filter extends Helper
         if ($board !== '' && $value !== '') {
             $complete = $value === 'i' ? 0 : 1;
             $sql = "SELECT * FROM tasks_notes WHERE type = 'task' AND completed = :complete AND board = :board ORDER BY id;";
-        } else if ($board === ''&& $value !== '') {
+        } else if ($board === '' && $value !== '') {
             $complete = $value === 'i' ? 0 : 1;
             $sql = "SELECT * FROM tasks_notes WHERE type = 'task' AND completed = :complete ORDER BY id;";
-        } else if ($board !== ''&& $value === '') {
+        } else if ($board !== '' && $value === '') {
             $sql = "SELECT * FROM tasks_notes WHERE type = 'task' AND board = :board ORDER BY id;";
         } else {
             $sql = "SELECT * FROM tasks_notes WHERE type = 'task' ORDER BY id;";
@@ -172,7 +172,7 @@ class Filter extends Helper
         while ($row = $stmt->fetch()) {
             $interval = 'Indefinite';
 
-            if($row['due_date'] !== 'Indefinite') {
+            if ($row['due_date'] !== 'Indefinite') {
                 $interval = intval($this->getRemainingDays($row['due_date']));
             }
 
@@ -180,6 +180,47 @@ class Filter extends Helper
                 'id' => $row['id'],
                 'description' => $row['description'],
                 'due' => $interval,
+                'completed' => $row['completed'],
+                'type' => $row['type'],
+                'board' => $row['board']
+            ];
+            \array_push($view, $temp);
+        }
+
+        return $view;
+    }
+
+    /**
+     * Returns all entries that match user-defined description
+     * @param string
+     * @param string
+     * @return array
+     */
+    function userDefined(string $text, string $board): array
+    {
+        $view = [];
+
+        if ($board !== '') {
+            $sql = "SELECT * FROM tasks_notes WHERE :text IN (id, description, date) AND board = :board ORDER BY id;";
+        } else {
+            $sql = "SELECT * FROM tasks_notes WHERE :text IN (id, description, date) ORDER BY id;";
+        }
+
+        $stmt = $this->db->prepare($sql);
+
+        if ($board !== '') {
+            $stmt->bindParam(':board', $board);
+        }
+
+        $stmt->bindParam(':text', $text);
+
+        $stmt->execute();
+
+        while ($row = $stmt->fetch()) {
+            $temp = [
+                'id' => $row['id'],
+                'description' => $row['description'],
+                'due' => $this->getRemainingDays($row['due_date']),
                 'completed' => $row['completed'],
                 'type' => $row['type'],
                 'board' => $row['board']

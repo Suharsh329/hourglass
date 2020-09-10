@@ -28,8 +28,6 @@ CREATE TABLE IF NOT EXISTS archives(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     description TEXT NOT NULL,
     date TEXT NOT NULL,
-    due_date TEXT,
-    completed INTEGER,
     type TEXT NOT NULL,
     board TEXT
 );
