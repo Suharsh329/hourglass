@@ -54,7 +54,7 @@ cd hourglass
 
 composer install
 
-./hl generate
+./hl generate or ./hl g (Make sure the .hourglass directory exists inside your home directory)
 ```
 
 Allow hl and hourglass files to be executable  
