@@ -17,7 +17,7 @@ class Database extends \PDO
 
                 $path = str_replace("~", getenv("HOME"), $json['dbDirectory']);
             } else {
-                $path = getenv("HOME") . "/.hourglass/hourglass.db";
+                $path = getenv("HOME") . "/.hourglass/";
             }
 
             $dsn = "sqlite:" . $path . "hourglass.db";
