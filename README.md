@@ -39,6 +39,10 @@ Moving on from the technical jargon, we know that developers spend a lot of time
 
 [sqlite3](https://www.sqlite.org/index.html)
 
+[php]()
+
+*You will also require*, **php-xml**, **php-mbstring** *and* **php-sqlite3**
+
 ### Installation
 
 Install with [composer](https://getcomposer.org/)  
