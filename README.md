@@ -41,7 +41,8 @@ Moving on from the technical jargon, we know that developers spend a lot of time
 
 [php]()
 
-*You will also require*, **php-xml**, **php-mbstring** *and* **php-sqlite3**
+*You will also require*, **php-xml(*)**, **php-mbstring** *and* **php-sqlite3**
+* *For php-xml, download according to the version of PHP installed in your system. e.g. php7.4-xml. It's php-xml for PHP8*
 
 ### Installation
 
