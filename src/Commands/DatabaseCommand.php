@@ -28,7 +28,7 @@ class DatabaseCommand extends Command
             $path = $input->getArgument('path');
         }
 
-        $process = new Process(['cp', __DIR__ . '/../../hourglass.db', $path]);
+        $process = new Process(['cp', __DIR__ . '/../../hourglass_example.db', $path]);
 
         try {
             $process->mustRun();
