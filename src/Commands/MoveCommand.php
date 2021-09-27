@@ -32,6 +32,12 @@ class MoveCommand extends Command
                 'b',
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
                 'Specify which board the task belongs to. A new board will be created if it does not exist.'
+            )
+            ->addOption(
+                'copy',
+                'c',
+                InputOption::VALUE_NONE,
+                'Copy entry from one board to another.'
             );
     }
 
@@ -39,15 +45,11 @@ class MoveCommand extends Command
     {
         $id = explode(',', implode(',', $input->getArgument('id')));
 
-        // Default board is Main
-        $boards = ['Main'];
+        $boards = $this->update->getValidatedBoards($input->getOption('board'));
 
-        if ($input->getOption('board')) {
-            $boards = $this->update->getValidatedBoards($input->getOption('board'));
-            if(empty($boards)) {
-                $output->writeln("<comment>Please enter a valid board name</comment>");
-                return;
-            }
+        if(empty($boards)) {
+            $output->writeln("<comment>Please enter a valid board name</comment>");
+            return;
         }
 
         if (count($boards) !== 2) {
@@ -55,10 +57,18 @@ class MoveCommand extends Command
             return;
         }
 
-        if ($this->update->move($id, $boards[0], $boards[1])) {
-            $output->writeln("<info>Entries moved</info>");
+        if ($input->getOption('copy')) {
+            if ($this->update->copy($id, $boards[0], $boards[1])) {
+                $output->writeln("<info>Entries copied</info>");
+            } else {
+                $output->writeln("<comment>Entries could not be moved</comment>");
+            }
         } else {
-            $output->writeln("<comment>Entries could not be moved</comment>");
+            if ($this->update->move($id, $boards[0], $boards[1])) {
+                $output->writeln("<info>Entries moved</info>");
+            } else {
+                $output->writeln("<comment>Entries could not be moved</comment>");
+            }
         }
     }
 }

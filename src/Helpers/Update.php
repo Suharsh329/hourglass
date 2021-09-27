@@ -97,20 +97,15 @@ class Update extends Helper
 
     /**
      * @param array $id
-     * @param string $to
      * @param string $from
-     * @param bool $copy
+     * @param string $to
      * @return bool
      */
-    public function move(array $id, string $to, string $from, bool $copy = false): bool
+    public function move(array $id, string $from, string $to): bool
     {
         if (!$this->boardExists($to)) {
             $this->createBoard($to);
 		}
-
-		//if ($copy === true) {
-		//	$sql = "INSERT INTO tasks_notes VALUES()";
-		//}
 
         $sql = "UPDATE tasks_notes SET id = :newId, board = :to WHERE id = :id AND board = :from;";
 
@@ -132,4 +127,33 @@ class Update extends Helper
 
         return true;
     }
+
+    // /**
+    //  * @param array $id
+    //  * @param string $from
+    //  * @param string $to
+    //  * @return bool
+    //  */
+    // public function copy(array $id, string $from, string $to): bool
+    // {
+    //     if (!$this->boardExists($to)) {
+    //         $this->createBoard($to);
+	// 	}
+
+    //     $sql = "INSERT INTO tasks_notes(id, description, date, type, board) SELECT :newId, description, date, type, :to FROM task_notes WHERE id = :id;";
+
+    //     $stmt = $this->db->prepare($sql);
+
+    //     foreach ($id as $_id) {
+    //         $newId = $this->generateId($to);
+
+    //         $stmt->bindParam(':newId', $newId);
+    //         $stmt->bindParam(':to', $to);
+    //         $stmt->bindParam(':id', $_id);
+
+    //         if(!$stmt->execute()) {
+    //             return false;
+    //         }
+    //     }
+    // }
 }
