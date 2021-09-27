@@ -3,6 +3,7 @@
 namespace App\Commands;
 
 use App\Helpers\Pomodoro;
+use App\Helpers\Check;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,9 +16,10 @@ class PomodoroCommand extends Command
 
     protected $pomodoro;
 
-    public function __construct(Pomodoro $pomodoro)
+    public function __construct(Pomodoro $pomodoro, Check $check)
     {
         $this->pomodoro = $pomodoro;
+        $this->check = $check;
         parent::__construct();
     }
 
@@ -48,6 +50,7 @@ class PomodoroCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $task = 'Activity';
+        $defaultTask = true;
         $board = 'Main';
 
         if ($input->getOption('board')) {
@@ -56,23 +59,28 @@ class PomodoroCommand extends Command
 
         if ($input->getArgument('task')) {
             $task = $this->pomodoro->getTask($input->getArgument('task'), $board);
+            if (!$task) {
+                $output->writeln("<comment>Task not found</comment>");
+                return;
+            }
+            $defaultTask = false;
         }
 
-        $aTime = 25;
+        $activityCount = 25;
         if ($input->getOption('time')) {
-            $aTime = $input->getOption('time');
+            $activityCount = $input->getOption('time');
         }
 
-        $rTime = 5;
+        $restCount = 5;
         if ($input->getOption('rest')) {
-            $rTime = $input->getOption('rest');
+            $restCount = $input->getOption('rest');
         }
 
-        $activityTime = $aTime * 60 * 10;
+        $activityTime = $activityCount * 60 * 10;
 
-        $breakTime = $rTime * 60 * 10;
+        $restTime = $restCount * 60 * 10;
 
-        $progressBar = $this->pomodoro->initProgressBar($output, $activityTime, $aTime);
+        $progressBar = $this->pomodoro->initProgressBar($output, $activityTime, $activityCount);
 
         $progressBar->start();
         for ($i = 0; $i < $activityTime; $i++) {
@@ -88,6 +96,10 @@ class PomodoroCommand extends Command
         }
         $progressBar->setMessage($task . " - Completed", 'status');
         $progressBar->finish();
+
+        if (!$defaultTask) {
+            $this->check->task([$input->getArgument('task')], [$board], true);
+        }
 
         $output->writeln("");
     }

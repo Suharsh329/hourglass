@@ -11,9 +11,13 @@ class Check extends Helper
      * @param array
      * @return bool
      */
-    public function task(array $values, array $boards): bool
-    {
-        $sql = "UPDATE tasks_notes SET completed = (1 - completed) WHERE id = :value AND board = :board;";
+    public function task(array $values, array $boards, $pomodoro = false): bool
+    {   
+        if (!$pomodoro) {
+            $sql = "UPDATE tasks_notes SET completed = (1 - completed) WHERE id = :value AND board = :board;";
+        } else {
+            $sql = "UPDATE tasks_notes SET completed = 1 WHERE id = :value AND board = :board;";
+        }
 
         $stmt = $this->db->prepare($sql);
 
