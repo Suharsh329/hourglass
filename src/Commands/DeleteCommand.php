@@ -44,7 +44,7 @@ class DeleteCommand extends Command
             $values = explode(',', implode(',', $input->getArgument('task_note')));
         }
 
-        $flag=  false;
+        $flag = false;
 
         // Default board is Main
         $boards = ['Main'];
