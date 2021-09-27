@@ -41,8 +41,9 @@ Moving on from the technical jargon, we know that developers spend a lot of time
 
 [php]()
 
-*You will also require*, **php-xml(*)**, **php-mbstring** *and* **php-sqlite3**
-* *For php-xml, download according to the version of PHP installed in your system. e.g. php7.4-xml. It's php-xml for PHP8*
+*You will also require*, **php-xml***, **php-mbstring** *and* **php-sqlite3**
+**For php-xml, download according to the version of PHP installed in your system. e.g. php7.4-xml. 
+It's php-xml for PHP8*
 
 ### Installation
 
@@ -212,11 +213,16 @@ hl u 1 Updated description -d 5 --change -b board
 
 #### Move Command
 ##### Shortcut: hl m Expanded command: hourglass move
-Move one or more entries to board2 from board1
+Move one or more entries from board1 to board2
 ```bash
-hl m 1,2 -b board2,board1
+hl m 1,2 -b board1,board2
 ```
 *A new board will be created if it does not exist*
+
+Copy an entry from board1 to board2
+```bash
+hl m 1,2 -b board1,board2 --copy
+```
 
 #### Filter Command
 ##### Shortcut: hl f Expanded command: hourglass filter
@@ -267,7 +273,7 @@ Default board is Main
 ```bash
 hl p 1 -b board
 ```
-*On completion of timer, the task will be tick-marked. (Not implemented yet)*
+*On completion of timer, the task will be tick-marked.*
 
 #### Generate Database Command
 ##### Shortcut: hl g Expanded command: hourglass generate
